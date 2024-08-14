@@ -7,8 +7,8 @@
     <title>threejs案例</title>
     
     
-    <script type="module" crossorigin src="/assets/index-d4164f4e.js"></script>
-    <link rel="stylesheet" href="/assets/index-6b291f9e.css">
+    <script type="module" crossorigin src="/assets/index-0ec3432e.js"></script>
+    <link rel="stylesheet" href="/assets/index-6ae1ff29.css">
   </head>
   <script>
     window.movingDraw = true;
@@ -110,22 +110,22 @@
             </div>
           </div>
           <div>
-              <div>
-                <span class="iconfont">&#xe61a;</span>
-              </div>
-              <div>
-                <p>6台</p>
-                <p>监测设备</p>
-              </div>
+            <div>
+              <span class="iconfont">&#xe61a;</span>
             </div>
+            <div>
+              <p>6台</p>
+              <p>监测设备</p>
+            </div>
+          </div>
           <div>
-              <div>
-                <span class="iconfont">&#xe60d;</span>
-              </div>
-              <div>
-                <p>2台</p>
-                <p>塔机状态</p>
-              </div>
+            <div>
+              <span class="iconfont">&#xe60d;</span>
+            </div>
+            <div>
+              <p>2台</p>
+              <p>塔机状态</p>
+            </div>
           </div>
         </div>
       </div>
@@ -186,10 +186,31 @@
             <div>超重</div>
             <div>已处理</div>
           </li>
-       
-         
         </ul>
       </div>
+    </div>
+    <div class="form">
+      <form id="myForm">
+        <label for="row">横梁数量：</label><br />
+        <input
+          type="number"
+          id="row"
+          name="row"
+          min="1"
+          max="9"
+          value="3"
+        /><br />
+        <label for="column">立柱数量：</label><br />
+        <input
+          type="number"
+          id="column"
+          name="column"
+          min="1"
+          max="9"
+          value="4"
+        /><br /><br />
+        <input type="submit" value="提交" />
+      </form>
     </div>
   </body>
   
