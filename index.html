@@ -7,211 +7,22 @@
     <title>threejs案例</title>
     
     
-    <script type="module" crossorigin src="/assets/index-4ebf597d.js"></script>
-    <link rel="stylesheet" href="/assets/index-33f266c9.css">
+    <script type="module" crossorigin src="/assets/index-db823014.js"></script>
+    <link rel="stylesheet" href="/assets/index-ab0be49f.css">
   </head>
   <script>
     window.movingDraw = true;
   </script>
   <body>
-    <div class="loading">
-      <div class="img">
-        <img
-          src="https://focus.dahuatech.com/static/loading.ad665028.gif"
-          alt=""
-        />
-      </div>
-      <div class="desc">正在加载</div>
+    <div class="input-btn">
+      <form action="#">
+        <input type="text" id="text" /><br />
+        <input type="submit" value="提交" />
+      </form>
     </div>
     <canvas class="3dCanvas"></canvas>
     <div class="css2d"></div>
     <div class="css3d"></div>
-    <ul id="layers">
-      <div class="layer-title">图例</div>
-    </ul>
-    <div class="title">
-      <div class="center-title">
-        <!-- <div class="left-menu">设备管理</div> -->
-        <div class="main-title">智慧工地安全生产管理平台</div>
-        <!-- <div class="right-menu">
-          <div>司机信息</div>
-        </div> -->
-      </div>
-    </div>
-    <div id="direction-dial">
-      <div class="point"></div>
-      <div class="needle">
-        <div class="bar">
-          <div class="move-point">
-            <div class="column-bar"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="numberList">
-      <!-- <div class="number-item">
-        <div class="top-number">
-          <p class="count" id="count1">223</p>
-          <p class="unit">km</p>
-        </div>
-        <div class="number-title">建筑面积</div>
-      </div>
-      <div class="number-item">
-        <div class="top-number">
-          <p class="count" id="count1">323</p>
-          <p class="unit">km</p>
-        </div>
-        <div class="number-title">建筑面积</div>
-      </div>
-      <div class="number-item">
-        <div class="top-number">
-          <p class="count" id="count1">333</p>
-          <p class="unit">km</p>
-        </div>
-        <div class="number-title">建筑面积</div>
-      </div>
-      <div class="number-item">
-        <div class="top-number">
-          <p class="count" id="count1">333</p>
-          <p class="unit">km</p>
-        </div>
-        <div class="number-title">建筑面积</div>
-      </div> -->
-    </div>
-    <div class="handle-desc">
-      <p>使用 <span>A</span>、<span>D</span>模拟上梁位置数据推送；</p>
-      <p>使用 <span>W</span>、<span>S</span>模拟吊钩位置数据推送；</p>
-      <p>使用 <span>←</span>、<span>→</span>模拟起重机转向数据推送；</p>
-    </div>
-
-    <div class="charts">
-      <div>
-        <div class="charts-title">
-          传感器状况
-          <div class="bar"></div>
-        </div>
-        <div class="charts-main">
-          <!-- <span class="iconfont">&#xe604;</span> -->
-          <div>
-            <div><span class="iconfont">&#xe604;</span></div>
-            <div>
-              <p>4台</p>
-              <p>刷脸设备</p>
-            </div>
-          </div>
-          <div>
-            <div>
-              <span class="iconfont">&#xe75f;</span>
-            </div>
-            <div>
-              <p>2台</p>
-              <p>位置传感</p>
-            </div>
-          </div>
-          <div>
-            <div>
-              <span class="iconfont">&#xe61a;</span>
-            </div>
-            <div>
-              <p>6台</p>
-              <p>监测设备</p>
-            </div>
-          </div>
-          <div>
-            <div>
-              <span class="iconfont">&#xe60d;</span>
-            </div>
-            <div>
-              <p>2台</p>
-              <p>塔机状态</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div class="charts-title">
-          施工设备统计
-          <div class="bar"></div>
-        </div>
-        <div class="pie-chart-main">
-          <div id="pie-chart"></div>
-        </div>
-      </div>
-      <div>
-        <div class="charts-title">
-          告警信息
-          <div class="bar"></div>
-        </div>
-        <ul class="alert-info">
-          <li>
-            <div>设备名称</div>
-            <div>设备类型</div>
-            <div>报警信息</div>
-            <div>处理</div>
-          </li>
-          <li>
-            <div>设备1号</div>
-            <div>起重机</div>
-            <div>超重</div>
-            <div>已处理</div>
-          </li>
-          <li>
-            <div>设备1号</div>
-            <div>起重机</div>
-            <div>超重</div>
-            <div>已处理</div>
-          </li>
-          <li>
-            <div>设备1号</div>
-            <div>起重机</div>
-            <div>超重</div>
-            <div>已处理</div>
-          </li>
-          <li>
-            <div>设备1号</div>
-            <div>起重机</div>
-            <div>超重</div>
-            <div>已处理</div>
-          </li>
-          <li>
-            <div>设备1号</div>
-            <div>起重机</div>
-            <div>超重</div>
-            <div>已处理</div>
-          </li>
-          <li>
-            <div>设备1号</div>
-            <div>起重机</div>
-            <div>超重</div>
-            <div>已处理</div>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="form">
-      <form id="myForm">
-        <label for="row">横梁数量：</label><br />
-        <input
-          type="number"
-          id="row"
-          name="row"
-          min="1"
-          max="9"
-          value="3"
-        /><br />
-        <label for="column">立柱数量：</label><br />
-        <input
-          type="number"
-          id="column"
-          name="column"
-          min="1"
-          max="9"
-          value="4"
-        /><br /><br />
-        <input type="submit" value="提交" />
-      </form>
-    </div>
   </body>
   
 </html>
