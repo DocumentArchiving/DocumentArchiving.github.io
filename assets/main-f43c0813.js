@@ -2,7 +2,7 @@ import"./modulepreload-polyfill-3cfb730f.js";let t=[{name:"\u52A8\u753B",url:"./
   
     <li>
       <div class="face-img">
-        <img src="https://three-statices.oss-cn-hangzhou.aliyuncs.com/threejs-animation/${e.face}" alt="">
+        <img src="https://three-statices.oss-cn-hangzhou.aliyuncs.com/threejs-animation${e.face}" alt="">
       </div>
       <div class="name">
         ${e.name}
