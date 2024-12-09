@@ -1,4 +1,4 @@
-import{l as X,cG as j,cM as _,a8 as Y,cN as E,B as L,V as g,cO as K,z as H,a4 as B,a3 as b,cP as Z,cQ as N,N as z,m as $,v as ee,d as te,Y as ie}from"./three.module-0e680ca0.js";_.line={worldUnits:{value:1},linewidth:{value:1},resolution:{value:new X(1,1)},dashOffset:{value:0},dashScale:{value:1},dashSize:{value:1},gapSize:{value:1}},E.line={uniforms:j.merge([_.common,_.fog,_.line]),vertexShader:`
+import{l as X,cG as j,cM as _,a8 as Y,cN as E,B as L,V as g,cO as K,z as H,a4 as B,a3 as b,cP as Z,cQ as N,N as z,m as $,v as ee,d as te,Y as ie}from"./three.module-8fc33d59.js";_.line={worldUnits:{value:1},linewidth:{value:1},resolution:{value:new X(1,1)},dashOffset:{value:0},dashScale:{value:1},dashSize:{value:1},gapSize:{value:1}},E.line={uniforms:j.merge([_.common,_.fog,_.line]),vertexShader:`
 		#include <common>
 		#include <color_pars_vertex>
 		#include <fog_pars_vertex>
