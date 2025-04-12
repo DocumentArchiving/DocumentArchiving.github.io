@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>高德地图智能体</title>
+    
+    
+    <link rel="stylesheet" href="/ai_agent/cache.amap.com/lbs/static/main1119.css" />
+    <script type="module" crossorigin src="/ai_agent/index-f5956bc5.js"></script>
+    <link rel="stylesheet" href="/ai_agent/index-d32e6932.css">
+  </head>
+  <script>
+    window.movingDraw = true;
+  </script>
+  <body>
+    <div class="leftMap">
+      <div id="container"></div>
+    </div>
+    <div class="rightChat">
+      <div class="title">
+        <div>
+          <img
+            src="https://img.alicdn.com/imgextra/i1/O1CN01OS6HKs29djXV7A7E4_!!6000000008091-2-tps-256-461.png"
+            alt=""
+          />
+          <div>高德地图智慧体</div>
+        </div>
+        <button id="clear">清除</button>
+      </div>
+      <div class="chatBox" id="chatBox"></div>
+      <div class="chatInput">
+        <textarea
+          type="text"
+          id="chatInput"
+          placeholder="请输入内容"
+        ></textarea>
+        <button id="chatBtn">发送</button>
+        <button id="audioBtn">语音</button>
+      </div>
+    </div>
+    <div class="input-card hide">
+      <p>轨迹回放控制</p>
+      <div class="input-item">
+          <input type="button" class="btn" value="开始动画" id="start" onclick="startAnimation()"/>
+          <input type="button" class="btn" value="暂停动画" id="pause" onclick="pauseAnimation()"/>
+      </div>
+      <div class="input-item">
+          <input type="button" class="btn" value="继续动画" id="resume" onclick="resumeAnimation()"/>
+          <input type="button" class="btn" value="停止动画" id="stop" onclick="stopAnimation()"/>
+      </div>
+  </div>
+  </body>
+  
+  <script src="./src/utils/speechrecognizer.min.js"></script>
+  
+</html>
