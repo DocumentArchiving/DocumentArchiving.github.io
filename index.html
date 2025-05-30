@@ -1,28 +1,1257 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>孙华鹏</title>
-    
-    <script type="module" crossorigin src="/assets/main-89f2033e.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-3cfb730f.js">
-    <link rel="stylesheet" href="/assets/style-b196260d.css">
+    <title>隐患分析专家评估</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind配置 -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#165DFF",
+              secondary: "#FF7D00",
+              success: "#00B42A",
+              warning: "#FF7D00",
+              danger: "#F53F3F",
+              neutral: {
+                100: "#F2F3F5",
+                200: "#E5E6EB",
+                300: "#C9CDD4",
+                400: "#86909C",
+                500: "#4E5969",
+                600: "#272E3B",
+                700: "#1D2129",
+              },
+            },
+            fontFamily: {
+              inter: ["Inter", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style type="text/tailwindcss">
+      @layer utilities {
+        .content-auto {
+          content-visibility: auto;
+        }
+        .text-shadow {
+          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .card-shadow {
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        .btn-hover {
+          @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5;
+        }
+        .analysis-item-hover {
+          @apply transition-all duration-300 hover:bg-neutral-100;
+        }
+        .scale-hover {
+          @apply transition-transform duration-300 hover:scale-105;
+        }
+      }
+    </style>
   </head>
 
-  <body>
-    <div class="search">
-      <input type="text" id="search" placeholder="搜索" />
-      <button>搜索</button>
+  <body class="font-inter bg-neutral-100 min-h-screen">
+    <!-- 顶部导航栏 -->
+    <header class="bg-white shadow-md fixed top-0 left-0 right-0 z-10">
+      <div
+        class="container mx-auto px-4 py-3 flex items-center justify-between"
+      >
+        <div class="flex items-center space-x-2">
+          <i class="fa fa-shield text-primary text-2xl"></i>
+          <h1 class="text-xl font-bold text-neutral-700">隐患分析专家评估</h1>
+        </div>
+
+        <div class="flex items-center space-x-4">
+          <div class="flex items-center space-x-1 text-neutral-500">
+            <i class="fa fa-user-circle-o text-lg"></i>
+            <span class="hidden sm:inline">张安全</span>
+          </div>
+
+          <div class="flex items-center space-x-1 text-primary">
+            <i class="fa fa-trophy"></i>
+            <span class="font-medium">125</span>
+            <span class="text-neutral-400 text-sm">积分</span>
+          </div>
+
+          <button class="text-neutral-500 hover:text-primary transition-colors">
+            <i class="fa fa-bell-o text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="container mx-auto px-4 pt-24 pb-16">
+      <!-- 任务进度 -->
+      <div class="bg-white rounded-lg p-4 mb-6 card-shadow">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-lg font-semibold text-neutral-700">当前任务</h2>
+            <p class="text-sm text-neutral-500">对大模型分析结果进行专家检查</p>
+          </div>
+          <div class="flex items-center space-x-2">
+            <span class="text-sm text-neutral-500">进度:</span>
+            <span class="text-sm font-medium text-primary">5/20</span>
+          </div>
+        </div>
+
+        <div class="mt-3 h-2 bg-neutral-200 rounded-full overflow-hidden">
+          <div class="h-full bg-primary rounded-full" style="width: 25%"></div>
+        </div>
+      </div>
+
+      <!-- 图片展示区 -->
+      <div class="bg-white rounded-xl overflow-hidden card-shadow mb-6">
+        <div class="relative">
+          <img
+            src="https://picsum.photos/800/500?random=1"
+            alt="安全生产现场照片"
+            class="w-full h-auto object-cover"
+          />
+        </div>
+
+        <div class="p-4 border-t border-neutral-200">
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-white bg-warning px-2 py-1 rounded-full"
+              >需人工审核</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- 分析结果列表 -->
+      <div class="bg-white rounded-xl card-shadow mb-6">
+        <div class="p-4 border-b border-neutral-200">
+          <h3 class="font-semibold text-neutral-700">AI分析结果</h3>
+          <p class="text-sm text-neutral-500">请对以下分析结果进行评价</p>
+        </div>
+
+        <!-- 分析结果项1 -->
+        <div class="p-4 border-b border-neutral-200 analysis-item-hover">
+          <div class="flex items-start">
+            <div
+              class="flex-shrink-0 bg-primary/10 text-primary rounded-full w-6 h-6 flex items-center justify-center mt-0.5"
+            >
+              1
+            </div>
+            <div class="ml-3 flex-grow">
+              <h4 class="font-medium text-neutral-700">隐患分析</h4>
+              <p class="text-neutral-600 mt-1">发现一名工人未佩戴安全帽</p>
+
+              <h4 class="font-medium text-neutral-700 mt-3">违规依据</h4>
+              <p class="text-neutral-600 mt-1">
+                《安全生产法》第四十五条规定：从业人员在作业过程中，应当严格落实岗位安全责任，遵守本单位的安全生产规章制度和操作规程，服从管理，正确佩戴和使用劳动防护用品。
+              </p>
+
+              <h4 class="font-medium text-neutral-700 mt-3">整改建议</h4>
+              <p class="text-neutral-600 mt-1">
+                立即要求该工人佩戴安全帽，并对其进行安全教育培训。
+              </p>
+
+              <!-- 评价按钮组 -->
+              <div class="mt-4 flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                  <button
+                    id="btn-approve-1"
+                    class="flex items-center justify-center w-10 h-10 rounded-full bg-success/10 text-success hover:bg-success/20 transition-colors"
+                  >
+                    <i class="fa fa-check"></i>
+                  </button>
+                  <button
+                    id="btn-partial-1"
+                    class="flex items-center justify-center w-10 h-10 rounded-full bg-warning/10 text-warning hover:bg-warning/20 transition-colors"
+                  >
+                    <i class="fa fa-adjust"></i>
+                  </button>
+                  <button
+                    id="btn-reject-1"
+                    class="flex items-center justify-center w-10 h-10 rounded-full bg-danger/10 text-danger hover:bg-danger/20 transition-colors"
+                  >
+                    <i class="fa fa-times"></i>
+                  </button>
+                </div>
+
+                <div class="text-sm text-neutral-400">
+                  <span id="status-1">未评价</span>
+                </div>
+              </div>
+
+              <!-- 部分正确原因选择器 (默认隐藏) -->
+              <div
+                id="partial-reasons-1"
+                class="mt-3 p-3 bg-neutral-100 rounded-lg hidden"
+              >
+                <p class="text-sm font-medium text-neutral-700 mb-2">
+                  请选择部分正确的原因：
+                </p>
+                <div class="space-y-2">
+                  <div class="flex flex-wrap gap-2">
+                    <label
+                      class="px-3 py-1.5 bg-white rounded-full border border-neutral-200 cursor-pointer hover:bg-primary/5 transition-colors"
+                    >
+                      <input
+                        type="checkbox"
+                        class="hidden reason-checkbox"
+                        data-id="1"
+                        data-type="partial"
+                      />
+                      <span class="text-sm text-neutral-600"
+                        >图中信息不足以判断</span
+                      >
+                    </label>
+                    <label
+                      class="px-3 py-1.5 bg-white rounded-full border border-neutral-200 cursor-pointer hover:bg-primary/5 transition-colors"
+                    >
+                      <input
+                        type="checkbox"
+                        class="hidden reason-checkbox"
+                        data-id="1"
+                        data-type="partial"
+                      />
+                      <span class="text-sm text-neutral-600"
+                        >存在所述现象，但不是隐患</span
+                      >
+                    </label>
+                    <label
+                      class="px-3 py-1.5 bg-white rounded-full border border-neutral-200 cursor-pointer hover:bg-primary/5 transition-colors"
+                    >
+                      <input
+                        type="checkbox"
+                        class="hidden reason-checkbox"
+                        data-id="1"
+                        data-type="partial"
+                      />
+                      <span class="text-sm text-neutral-600"
+                        >完全错误，不存在所述的现象</span
+                      >
+                    </label>
+                  </div>
+                  <div class="mt-2 pt-2 border-t border-neutral-200">
+                    <button
+                      id="audio-btn-partial-1"
+                      class="text-primary text-sm font-medium flex items-center"
+                    >
+                      <i class="fa fa-microphone mr-1"></i> 语音说明
+                      <span class="text-neutral-400 text-xs ml-1"
+                        >(其他请语音补充)</span
+                      >
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 分析错误原因选择器 (默认隐藏) -->
+              <div
+                id="reject-reasons-1"
+                class="mt-3 p-3 bg-neutral-100 rounded-lg hidden"
+              >
+                <p class="text-sm font-medium text-neutral-700 mb-2">
+                  请选择分析错误的原因：
+                </p>
+                <div class="space-y-2">
+                  <div class="flex flex-wrap gap-2">
+                    <label
+                      class="px-3 py-1.5 bg-white rounded-full border border-neutral-200 cursor-pointer hover:bg-primary/5 transition-colors"
+                    >
+                      <input
+                        type="checkbox"
+                        class="hidden reason-checkbox"
+                        data-id="1"
+                        data-type="reject"
+                      />
+                      <span class="text-sm text-neutral-600"
+                        >图中信息不足以判断</span
+                      >
+                    </label>
+                    <label
+                      class="px-3 py-1.5 bg-white rounded-full border border-neutral-200 cursor-pointer hover:bg-primary/5 transition-colors"
+                    >
+                      <input
+                        type="checkbox"
+                        class="hidden reason-checkbox"
+                        data-id="1"
+                        data-type="reject"
+                      />
+                      <span class="text-sm text-neutral-600"
+                        >存在所述现象，但不是隐患</span
+                      >
+                    </label>
+                    <label
+                      class="px-3 py-1.5 bg-white rounded-full border border-neutral-200 cursor-pointer hover:bg-primary/5 transition-colors"
+                    >
+                      <input
+                        type="checkbox"
+                        class="hidden reason-checkbox"
+                        data-id="1"
+                        data-type="reject"
+                      />
+                      <span class="text-sm text-neutral-600"
+                        >完全错误，不存在所述的现象</span
+                      >
+                    </label>
+                  </div>
+                  <div class="mt-2 pt-2 border-t border-neutral-200">
+                    <button
+                      id="audio-btn-reject-1"
+                      class="text-primary text-sm font-medium flex items-center"
+                    >
+                      <i class="fa fa-microphone mr-1"></i> 语音说明
+                      <span class="text-neutral-400 text-xs ml-1"
+                        >(其他请语音补充)</span
+                      >
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 语音识别内容显示区域 (默认隐藏) -->
+              <div
+                id="audio-transcript-1"
+                class="mt-3 p-3 bg-neutral-100 rounded-lg hidden"
+              >
+                <div class="flex items-start">
+                  <i class="fa fa-volume-up text-primary mt-0.5 mr-2"></i>
+                  <div>
+                    <p class="text-sm font-medium text-neutral-700">
+                      语音说明内容：
+                    </p>
+                    <p class="text-sm text-neutral-600 mt-1">
+                      图片中工人确实佩戴了安全帽，但安全帽的带子没有系好，存在安全隐患。
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 分析结果项2 -->
+        <div class="p-4 border-b border-neutral-200 analysis-item-hover">
+          <div class="flex items-start">
+            <div
+              class="flex-shrink-0 bg-primary/10 text-primary rounded-full w-6 h-6 flex items-center justify-center mt-0.5"
+            >
+              2
+            </div>
+            <div class="ml-3 flex-grow">
+              <h4 class="font-medium text-neutral-700">隐患分析</h4>
+              <p class="text-neutral-600 mt-1">消防通道被杂物堵塞</p>
+
+              <h4 class="font-medium text-neutral-700 mt-3">违规依据</h4>
+              <p class="text-neutral-600 mt-1">
+                《消防法》第二十八条规定：任何单位、个人不得损坏、挪用或者擅自拆除、停用消防设施、器材，不得埋压、圈占、遮挡消火栓或者占用防火间距，不得占用、堵塞、封闭疏散通道、安全出口、消防车通道。
+              </p>
+
+              <h4 class="font-medium text-neutral-700 mt-3">整改建议</h4>
+              <p class="text-neutral-600 mt-1">
+                立即清理消防通道内的杂物，确保通道畅通无阻。
+              </p>
+
+              <!-- 评价按钮组 -->
+              <div class="mt-4 flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                  <button
+                    id="btn-approve-2"
+                    class="flex items-center justify-center w-10 h-10 rounded-full bg-success/10 text-success hover:bg-success/20 transition-colors"
+                  >
+                    <i class="fa fa-check"></i>
+                  </button>
+                  <button
+                    id="btn-partial-2"
+                    class="flex items-center justify-center w-10 h-10 rounded-full bg-warning/10 text-warning hover:bg-warning/20 transition-colors"
+                  >
+                    <i class="fa fa-adjust"></i>
+                  </button>
+                  <button
+                    id="btn-reject-2"
+                    class="flex items-center justify-center w-10 h-10 rounded-full bg-danger/10 text-danger hover:bg-danger/20 transition-colors"
+                  >
+                    <i class="fa fa-times"></i>
+                  </button>
+                </div>
+
+                <div class="text-sm text-neutral-400">
+                  <span id="status-2">未评价</span>
+                </div>
+              </div>
+
+              <!-- 部分正确原因选择器 (默认隐藏) -->
+              <div
+                id="partial-reasons-2"
+                class="mt-3 p-3 bg-neutral-100 rounded-lg hidden"
+              >
+                <p class="text-sm font-medium text-neutral-700 mb-2">
+                  请选择部分正确的原因：
+                </p>
+                <div class="space-y-2">
+                  <div class="flex flex-wrap gap-2">
+                    <label
+                      class="px-3 py-1.5 bg-white rounded-full border border-neutral-200 cursor-pointer hover:bg-primary/5 transition-colors"
+                    >
+                      <input
+                        type="checkbox"
+                        class="hidden reason-checkbox"
+                        data-id="2"
+                        data-type="partial"
+                      />
+                      <span class="text-sm text-neutral-600"
+                        >图中信息不足以判断</span
+                      >
+                    </label>
+                    <label
+                      class="px-3 py-1.5 bg-white rounded-full border border-neutral-200 cursor-pointer hover:bg-primary/5 transition-colors"
+                    >
+                      <input
+                        type="checkbox"
+                        class="hidden reason-checkbox"
+                        data-id="2"
+                        data-type="partial"
+                      />
+                      <span class="text-sm text-neutral-600"
+                        >存在所述现象，但不是隐患</span
+                      >
+                    </label>
+                    <label
+                      class="px-3 py-1.5 bg-white rounded-full border border-neutral-200 cursor-pointer hover:bg-primary/5 transition-colors"
+                    >
+                      <input
+                        type="checkbox"
+                        class="hidden reason-checkbox"
+                        data-id="2"
+                        data-type="partial"
+                      />
+                      <span class="text-sm text-neutral-600"
+                        >完全错误，不存在所述的现象</span
+                      >
+                    </label>
+                  </div>
+                  <div class="mt-2 pt-2 border-t border-neutral-200">
+                    <button
+                      id="audio-btn-partial-2"
+                      class="text-primary text-sm font-medium flex items-center"
+                    >
+                      <i class="fa fa-microphone mr-1"></i> 语音说明
+                      <span class="text-neutral-400 text-xs ml-1"
+                        >(其他请语音补充)</span
+                      >
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 分析错误原因选择器 (默认隐藏) -->
+              <div
+                id="reject-reasons-2"
+                class="mt-3 p-3 bg-neutral-100 rounded-lg hidden"
+              >
+                <p class="text-sm font-medium text-neutral-700 mb-2">
+                  请选择分析错误的原因：
+                </p>
+                <div class="space-y-2">
+                  <div class="flex flex-wrap gap-2">
+                    <label
+                      class="px-3 py-1.5 bg-white rounded-full border border-neutral-200 cursor-pointer hover:bg-primary/5 transition-colors"
+                    >
+                      <input
+                        type="checkbox"
+                        class="hidden reason-checkbox"
+                        data-id="2"
+                        data-type="reject"
+                      />
+                      <span class="text-sm text-neutral-600"
+                        >图中信息不足以判断</span
+                      >
+                    </label>
+                    <label
+                      class="px-3 py-1.5 bg-white rounded-full border border-neutral-200 cursor-pointer hover:bg-primary/5 transition-colors"
+                    >
+                      <input
+                        type="checkbox"
+                        class="hidden reason-checkbox"
+                        data-id="2"
+                        data-type="reject"
+                      />
+                      <span class="text-sm text-neutral-600"
+                        >存在所述现象，但不是隐患</span
+                      >
+                    </label>
+                    <label
+                      class="px-3 py-1.5 bg-white rounded-full border border-neutral-200 cursor-pointer hover:bg-primary/5 transition-colors"
+                    >
+                      <input
+                        type="checkbox"
+                        class="hidden reason-checkbox"
+                        data-id="2"
+                        data-type="reject"
+                      />
+                      <span class="text-sm text-neutral-600"
+                        >完全错误，不存在所述的现象</span
+                      >
+                    </label>
+                  </div>
+                  <div class="mt-2 pt-2 border-t border-neutral-200">
+                    <button
+                      id="audio-btn-reject-2"
+                      class="text-primary text-sm font-medium flex items-center"
+                    >
+                      <i class="fa fa-microphone mr-1"></i> 语音说明
+                      <span class="text-neutral-400 text-xs ml-1"
+                        >(其他请语音补充)</span
+                      >
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 语音识别内容显示区域 (默认隐藏) -->
+              <div
+                id="audio-transcript-2"
+                class="mt-3 p-3 bg-neutral-100 rounded-lg hidden"
+              >
+                <div class="flex items-start">
+                  <i class="fa fa-volume-up text-primary mt-0.5 mr-2"></i>
+                  <div>
+                    <p class="text-sm font-medium text-neutral-700">
+                      语音说明内容：
+                    </p>
+                    <p class="text-sm text-neutral-600 mt-1">
+                      图片中确实有少量杂物，但通道仍可正常通行，不会影响紧急情况下的疏散。
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 分析结果项3 -->
+        <div class="p-4 analysis-item-hover">
+          <div class="flex items-start">
+            <div
+              class="flex-shrink-0 bg-primary/10 text-primary rounded-full w-6 h-6 flex items-center justify-center mt-0.5"
+            >
+              3
+            </div>
+            <div class="ml-3 flex-grow">
+              <h4 class="font-medium text-neutral-700">隐患分析</h4>
+              <p class="text-neutral-600 mt-1">电气设备未接地</p>
+
+              <h4 class="font-medium text-neutral-700 mt-3">违规依据</h4>
+              <p class="text-neutral-600 mt-1">
+                《电气安全规程》规定：电气设备必须有良好的接地装置，以防止设备漏电时发生触电事故。
+              </p>
+
+              <h4 class="font-medium text-neutral-700 mt-3">整改建议</h4>
+              <p class="text-neutral-600 mt-1">
+                立即对电气设备进行接地处理，并检查接地电阻是否符合要求。
+              </p>
+
+              <!-- 评价按钮组 -->
+              <div class="mt-4 flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                  <button
+                    id="btn-approve-3"
+                    class="flex items-center justify-center w-10 h-10 rounded-full bg-success/10 text-success hover:bg-success/20 transition-colors"
+                  >
+                    <i class="fa fa-check"></i>
+                  </button>
+                  <button
+                    id="btn-partial-3"
+                    class="flex items-center justify-center w-10 h-10 rounded-full bg-warning/10 text-warning hover:bg-warning/20 transition-colors"
+                  >
+                    <i class="fa fa-adjust"></i>
+                  </button>
+                  <button
+                    id="btn-reject-3"
+                    class="flex items-center justify-center w-10 h-10 rounded-full bg-danger/10 text-danger hover:bg-danger/20 transition-colors"
+                  >
+                    <i class="fa fa-times"></i>
+                  </button>
+                </div>
+
+                <div class="text-sm text-neutral-400">
+                  <span id="status-3">未评价</span>
+                </div>
+              </div>
+
+              <!-- 部分正确原因选择器 (默认隐藏) -->
+              <div
+                id="partial-reasons-3"
+                class="mt-3 p-3 bg-neutral-100 rounded-lg hidden"
+              >
+                <p class="text-sm font-medium text-neutral-700 mb-2">
+                  请选择部分正确的原因：
+                </p>
+                <div class="space-y-2">
+                  <div class="flex flex-wrap gap-2">
+                    <label
+                      class="px-3 py-1.5 bg-white rounded-full border border-neutral-200 cursor-pointer hover:bg-primary/5 transition-colors"
+                    >
+                      <input
+                        type="checkbox"
+                        class="hidden reason-checkbox"
+                        data-id="3"
+                        data-type="partial"
+                      />
+                      <span class="text-sm text-neutral-600"
+                        >图中信息不足以判断</span
+                      >
+                    </label>
+                    <label
+                      class="px-3 py-1.5 bg-white rounded-full border border-neutral-200 cursor-pointer hover:bg-primary/5 transition-colors"
+                    >
+                      <input
+                        type="checkbox"
+                        class="hidden reason-checkbox"
+                        data-id="3"
+                        data-type="partial"
+                      />
+                      <span class="text-sm text-neutral-600"
+                        >存在所述现象，但不是隐患</span
+                      >
+                    </label>
+                    <label
+                      class="px-3 py-1.5 bg-white rounded-full border border-neutral-200 cursor-pointer hover:bg-primary/5 transition-colors"
+                    >
+                      <input
+                        type="checkbox"
+                        class="hidden reason-checkbox"
+                        data-id="3"
+                        data-type="partial"
+                      />
+                      <span class="text-sm text-neutral-600"
+                        >完全错误，不存在所述的现象</span
+                      >
+                    </label>
+                  </div>
+                  <div class="mt-2 pt-2 border-t border-neutral-200">
+                    <button
+                      id="audio-btn-partial-3"
+                      class="text-primary text-sm font-medium flex items-center"
+                    >
+                      <i class="fa fa-microphone mr-1"></i> 语音说明
+                      <span class="text-neutral-400 text-xs ml-1"
+                        >(其他请语音补充)</span
+                      >
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 分析错误原因选择器 (默认隐藏) -->
+              <div
+                id="reject-reasons-3"
+                class="mt-3 p-3 bg-neutral-100 rounded-lg hidden"
+              >
+                <p class="text-sm font-medium text-neutral-700 mb-2">
+                  请选择分析错误的原因：
+                </p>
+                <div class="space-y-2">
+                  <div class="flex flex-wrap gap-2">
+                    <label
+                      class="px-3 py-1.5 bg-white rounded-full border border-neutral-200 cursor-pointer hover:bg-primary/5 transition-colors"
+                    >
+                      <input
+                        type="checkbox"
+                        class="hidden reason-checkbox"
+                        data-id="3"
+                        data-type="reject"
+                      />
+                      <span class="text-sm text-neutral-600"
+                        >图中信息不足以判断</span
+                      >
+                    </label>
+                    <label
+                      class="px-3 py-1.5 bg-white rounded-full border border-neutral-200 cursor-pointer hover:bg-primary/5 transition-colors"
+                    >
+                      <input
+                        type="checkbox"
+                        class="hidden reason-checkbox"
+                        data-id="3"
+                        data-type="reject"
+                      />
+                      <span class="text-sm text-neutral-600"
+                        >存在所述现象，但不是隐患</span
+                      >
+                    </label>
+                    <label
+                      class="px-3 py-1.5 bg-white rounded-full border border-neutral-200 cursor-pointer hover:bg-primary/5 transition-colors"
+                    >
+                      <input
+                        type="checkbox"
+                        class="hidden reason-checkbox"
+                        data-id="3"
+                        data-type="reject"
+                      />
+                      <span class="text-sm text-neutral-600"
+                        >完全错误，不存在所述的现象</span
+                      >
+                    </label>
+                  </div>
+                  <div class="mt-2 pt-2 border-t border-neutral-200">
+                    <button
+                      id="audio-btn-reject-3"
+                      class="text-primary text-sm font-medium flex items-center"
+                    >
+                      <i class="fa fa-microphone mr-1"></i> 语音说明
+                      <span class="text-neutral-400 text-xs ml-1"
+                        >(其他请语音补充)</span
+                      >
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 语音识别内容显示区域 (默认隐藏) -->
+              <div
+                id="audio-transcript-3"
+                class="mt-3 p-3 bg-neutral-100 rounded-lg hidden"
+              >
+                <div class="flex items-start">
+                  <i class="fa fa-volume-up text-primary mt-0.5 mr-2"></i>
+                  <div>
+                    <p class="text-sm font-medium text-neutral-700">
+                      语音说明内容：
+                    </p>
+                    <p class="text-sm text-neutral-600 mt-1">
+                      该设备为二类设备，采用双重绝缘保护，根据规定不需要接地。
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 提交区域 -->
+      <div class="bg-white rounded-xl p-4 card-shadow">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-neutral-500 text-sm">
+              已评价:
+              <span id="evaluated-count" class="font-medium text-primary"
+                >0</span
+              >/3
+            </p>
+            <p class="text-neutral-500 text-sm mt-1">
+              完成后可获得:
+              <span class="font-medium text-secondary">5积分</span>
+            </p>
+          </div>
+
+          <button
+            id="next-btn"
+            class="px-6 py-2.5 bg-primary text-white rounded-lg font-medium btn-hover scale-hover opacity-50 cursor-not-allowed"
+          >
+            <i class="fa fa-arrow-right mr-2"></i>下一张
+          </button>
+        </div>
+
+        <!-- 必须选择标签或语音描述的提示 -->
+        <div
+          id="validation-hint"
+          class="mt-3 p-3 bg-danger/10 rounded-lg border border-danger/20 hidden"
+        >
+          <div class="flex items-start">
+            <i class="fa fa-exclamation-circle text-danger mt-0.5 mr-2"></i>
+            <div>
+              <p class="text-sm font-medium text-danger">评价提示</p>
+              <p class="text-sm text-danger/80 mt-1">
+                选择"部分正确"或"分析错误"时，必须选择至少一个原因标签或提供语音描述。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- 语音录制模态框 (默认隐藏) -->
+    <div
+      id="audio-modal"
+      class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden"
+    >
+      <div class="bg-white rounded-xl p-6 max-w-md w-full mx-4">
+        <div class="text-center">
+          <div class="relative inline-block">
+            <div
+              class="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto"
+            >
+              <i class="fa fa-microphone text-primary text-3xl"></i>
+            </div>
+            <div
+              class="absolute -bottom-2 -right-2 w-8 h-8 bg-danger rounded-full flex items-center justify-center animate-pulse"
+            >
+              <i class="fa fa-circle text-white text-xs"></i>
+            </div>
+          </div>
+
+          <h3 class="font-semibold text-neutral-700 mt-4">正在录制语音</h3>
+          <p class="text-neutral-500 text-sm mt-1">
+            请说出您的理由（最长60秒）
+          </p>
+
+          <div class="mt-6 flex items-center justify-center space-x-4">
+            <button
+              id="cancel-audio"
+              class="px-4 py-2 border border-neutral-300 rounded-lg text-neutral-700 font-medium hover:bg-neutral-100 transition-colors"
+            >
+              取消
+            </button>
+            <button
+              id="save-audio"
+              class="px-4 py-2 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors"
+            >
+              保存
+            </button>
+          </div>
+
+          <div class="mt-4 flex items-center justify-center">
+            <div class="flex items-center space-x-1">
+              <div class="w-1 h-3 bg-primary rounded-full"></div>
+              <div class="w-1 h-5 bg-primary rounded-full"></div>
+              <div class="w-1 h-7 bg-primary rounded-full"></div>
+              <div class="w-1 h-5 bg-primary rounded-full"></div>
+              <div class="w-1 h-3 bg-primary rounded-full"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <ul class="menuList"></ul>
-    <div class="link">
-      <p>友情链接</p>
-      <ul class="linkList">
-     
-      </ul>
+
+    <!-- 提交成功提示 (默认隐藏) -->
+    <div
+      id="success-toast"
+      class="fixed bottom-20 left-1/2 transform -translate-x-1/2 bg-success text-white px-6 py-3 rounded-lg shadow-lg z-50 hidden"
+    >
+      <div class="flex items-center space-x-2">
+        <i class="fa fa-check-circle"></i>
+        <span>评价提交成功！+5积分</span>
+      </div>
     </div>
+
+    <script>
+      // 初始化评价状态
+      const evaluationStatus = {
+        1: null,
+        2: null,
+        3: null,
+      };
+
+      // 初始化语音或标签选择状态
+      const reasonStatus = {
+        1: {
+          partial: false,
+          reject: false,
+          audio: false,
+        },
+        2: {
+          partial: false,
+          reject: false,
+          audio: false,
+        },
+        3: {
+          partial: false,
+          reject: false,
+          audio: false,
+        },
+      };
+
+      // 获取所有评价按钮
+      for (let i = 1; i <= 3; i++) {
+        const approveBtn = document.getElementById(`btn-approve-${i}`);
+        const partialBtn = document.getElementById(`btn-partial-${i}`);
+        const rejectBtn = document.getElementById(`btn-reject-${i}`);
+        const statusEl = document.getElementById(`status-${i}`);
+        const partialReasons = document.getElementById(`partial-reasons-${i}`);
+        const rejectReasons = document.getElementById(`reject-reasons-${i}`);
+        const audioTranscript = document.getElementById(
+          `audio-transcript-${i}`
+        );
+
+        // 认可按钮点击事件
+        approveBtn.addEventListener("click", () => {
+          // 重置其他按钮状态
+          partialBtn.classList.remove("ring-2", "ring-warning");
+          rejectBtn.classList.remove("ring-2", "ring-danger");
+
+          // 设置当前按钮状态
+          approveBtn.classList.toggle("ring-2");
+          approveBtn.classList.toggle("ring-success");
+
+          // 更新评价状态
+          if (approveBtn.classList.contains("ring-2")) {
+            evaluationStatus[i] = "approve";
+            statusEl.textContent = "已认可";
+            statusEl.className = "text-success font-medium";
+
+            // 隐藏原因选择器和语音内容
+            partialReasons.classList.add("hidden");
+            rejectReasons.classList.add("hidden");
+            audioTranscript.classList.add("hidden");
+
+            // 更新语音或标签选择状态（认可不需要标签或语音）
+            reasonStatus[i].partial = true;
+            reasonStatus[i].reject = true;
+          } else {
+            evaluationStatus[i] = null;
+            statusEl.textContent = "未评价";
+            statusEl.className = "text-neutral-400";
+
+            // 重置语音或标签选择状态
+            reasonStatus[i].partial = false;
+            reasonStatus[i].reject = false;
+          }
+
+          // 更新已评价数量
+          updateEvaluatedCount();
+        });
+
+        // 部分正确按钮点击事件
+        partialBtn.addEventListener("click", () => {
+          // 重置其他按钮状态
+          approveBtn.classList.remove("ring-2", "ring-success");
+          rejectBtn.classList.remove("ring-2", "ring-danger");
+
+          // 设置当前按钮状态
+          partialBtn.classList.toggle("ring-2");
+          partialBtn.classList.toggle("ring-warning");
+
+          // 更新评价状态
+          if (partialBtn.classList.contains("ring-2")) {
+            evaluationStatus[i] = "partial";
+            statusEl.textContent = "部分正确";
+            statusEl.className = "text-warning font-medium";
+
+            // 显示/隐藏原因选择器
+            partialReasons.classList.remove("hidden");
+            rejectReasons.classList.add("hidden");
+            audioTranscript.classList.add("hidden");
+
+            // 重置语音或标签选择状态
+            reasonStatus[i].partial = false;
+            reasonStatus[i].reject = true;
+          } else {
+            evaluationStatus[i] = null;
+            statusEl.textContent = "未评价";
+            statusEl.className = "text-neutral-400";
+
+            // 隐藏原因选择器
+            partialReasons.classList.add("hidden");
+
+            // 重置语音或标签选择状态
+            reasonStatus[i].partial = false;
+            reasonStatus[i].reject = false;
+          }
+
+          // 更新已评价数量
+          updateEvaluatedCount();
+        });
+
+        // 分析错误按钮点击事件
+        rejectBtn.addEventListener("click", () => {
+          // 重置其他按钮状态
+          approveBtn.classList.remove("ring-2", "ring-success");
+          partialBtn.classList.remove("ring-2", "ring-warning");
+
+          // 设置当前按钮状态
+          rejectBtn.classList.toggle("ring-2");
+          rejectBtn.classList.toggle("ring-danger");
+
+          // 更新评价状态
+          if (rejectBtn.classList.contains("ring-2")) {
+            evaluationStatus[i] = "reject";
+            statusEl.textContent = "分析错误";
+            statusEl.className = "text-danger font-medium";
+
+            // 显示/隐藏原因选择器
+            rejectReasons.classList.remove("hidden");
+            partialReasons.classList.add("hidden");
+            audioTranscript.classList.add("hidden");
+
+            // 重置语音或标签选择状态
+            reasonStatus[i].reject = false;
+            reasonStatus[i].partial = true;
+          } else {
+            evaluationStatus[i] = null;
+            statusEl.textContent = "未评价";
+            statusEl.className = "text-neutral-400";
+
+            // 隐藏原因选择器
+            rejectReasons.classList.add("hidden");
+
+            // 重置语音或标签选择状态
+            reasonStatus[i].reject = false;
+            reasonStatus[i].partial = false;
+          }
+
+          // 更新已评价数量
+          updateEvaluatedCount();
+        });
+
+        // 初始化标签点击事件
+        const reasonLabels = document.querySelectorAll(
+          `label:has(.reason-checkbox[data-id="${i}"])`
+        );
+        reasonLabels.forEach((label) => {
+          const checkbox = label.querySelector(".reason-checkbox");
+
+          label.addEventListener("click", (e) => {
+            e.preventDefault(); // 防止默认的checkbox点击行为
+
+            // 切换选中状态
+            checkbox.checked = !checkbox.checked;
+
+            // 更新标签样式
+            if (checkbox.checked) {
+              label.classList.add(
+                "bg-primary/10",
+                "border-primary",
+                "text-primary"
+              );
+              label.classList.remove("bg-white", "border-neutral-200");
+              label.querySelector("span").classList.remove("text-neutral-600");
+              label.querySelector("span").classList.add("text-primary");
+            } else {
+              label.classList.remove(
+                "bg-primary/10",
+                "border-primary",
+                "text-primary"
+              );
+              label.classList.add("bg-white", "border-neutral-200");
+              label.querySelector("span").classList.add("text-neutral-600");
+              label.querySelector("span").classList.remove("text-primary");
+            }
+
+            // 更新标签选择状态
+            const type = checkbox.getAttribute("data-type");
+            const id = checkbox.getAttribute("data-id");
+
+            // 检查是否有选中的标签
+            const checkedLabels = document.querySelectorAll(
+              `input.reason-checkbox[data-id="${id}"][data-type="${type}"]:checked`
+            );
+            reasonStatus[id][type] = checkedLabels.length > 0;
+
+            // 更新已评价数量
+            updateEvaluatedCount();
+          });
+        });
+
+        // 语音说明按钮点击事件
+        const audioBtnPartial = document.getElementById(
+          `audio-btn-partial-${i}`
+        );
+        const audioBtnReject = document.getElementById(`audio-btn-reject-${i}`);
+
+        if (audioBtnPartial) {
+          audioBtnPartial.addEventListener("click", () => {
+            document.getElementById("audio-modal").classList.remove("hidden");
+            // 存储当前操作的ID和类型
+            localStorage.setItem(
+              "currentAudio",
+              JSON.stringify({ id: i, type: "partial" })
+            );
+          });
+        }
+
+        if (audioBtnReject) {
+          audioBtnReject.addEventListener("click", () => {
+            document.getElementById("audio-modal").classList.remove("hidden");
+            // 存储当前操作的ID和类型
+            localStorage.setItem(
+              "currentAudio",
+              JSON.stringify({ id: i, type: "reject" })
+            );
+          });
+        }
+      }
+
+      // 取消录音按钮点击事件
+      document.getElementById("cancel-audio").addEventListener("click", () => {
+        document.getElementById("audio-modal").classList.add("hidden");
+      });
+
+      // 保存录音按钮点击事件
+      document.getElementById("save-audio").addEventListener("click", () => {
+        document.getElementById("audio-modal").classList.add("hidden");
+
+        // 获取当前操作的ID和类型
+        const currentAudio = JSON.parse(localStorage.getItem("currentAudio"));
+        if (currentAudio) {
+          const { id, type } = currentAudio;
+
+          // 更新语音或标签选择状态
+          reasonStatus[id][type] = true;
+          reasonStatus[id].audio = true;
+
+          // 显示语音识别内容
+          const audioTranscript = document.getElementById(
+            `audio-transcript-${id}`
+          );
+          audioTranscript.classList.remove("hidden");
+
+          // 更新已评价数量
+          updateEvaluatedCount();
+        }
+      });
+
+      // 下一张按钮点击事件
+      document.getElementById("next-btn").addEventListener("click", () => {
+        console.log("下一张按钮被点击");
+
+        // 检查是否所有项都已评价
+        const allEvaluated = Object.values(evaluationStatus).every(
+          (status) => status !== null
+        );
+        console.log("所有项是否已评价:", allEvaluated);
+
+        // 检查所有部分正确或分析错误的评价都有标签或语音
+        let allValid = true;
+        for (let i = 1; i <= 3; i++) {
+          if (evaluationStatus[i] === "partial" && !reasonStatus[i].partial) {
+            allValid = false;
+            console.log(`项目 ${i} 无效: 部分正确但没有标签或语音`);
+            break;
+          }
+          if (evaluationStatus[i] === "reject" && !reasonStatus[i].reject) {
+            allValid = false;
+            console.log(`项目 ${i} 无效: 分析错误但没有标签或语音`);
+            break;
+          }
+        }
+        console.log("所有部分正确或分析错误的项是否有标签或语音:", allValid);
+
+        if (allEvaluated && allValid) {
+          console.log("所有条件满足，准备进入下一张");
+          // 显示成功提示
+          const successToast = document.getElementById("success-toast");
+          successToast.classList.remove("hidden");
+
+          // 3秒后隐藏提示
+          setTimeout(() => {
+            successToast.classList.add("hidden");
+          }, 3000);
+
+          // 模拟加载下一张图片
+          setTimeout(() => {
+            // 重置评价状态
+            for (let i = 1; i <= 3; i++) {
+              evaluationStatus[i] = null;
+              reasonStatus[i].partial = false;
+              reasonStatus[i].reject = false;
+              reasonStatus[i].audio = false;
+
+              // 重置按钮状态
+              document
+                .getElementById(`btn-approve-${i}`)
+                .classList.remove("ring-2", "ring-success");
+              document
+                .getElementById(`btn-partial-${i}`)
+                .classList.remove("ring-2", "ring-warning");
+              document
+                .getElementById(`btn-reject-${i}`)
+                .classList.remove("ring-2", "ring-danger");
+              document.getElementById(`status-${i}`).textContent = "未评价";
+              document.getElementById(`status-${i}`).className =
+                "text-neutral-400";
+              document
+                .getElementById(`partial-reasons-${i}`)
+                .classList.add("hidden");
+              document
+                .getElementById(`reject-reasons-${i}`)
+                .classList.add("hidden");
+              document
+                .getElementById(`audio-transcript-${i}`)
+                .classList.add("hidden");
+
+              // 重置标签选中状态
+              const labels = document.querySelectorAll(
+                `label:has(.reason-checkbox[data-id="${i}"])`
+              );
+              labels.forEach((label) => {
+                const checkbox = label.querySelector(".reason-checkbox");
+                checkbox.checked = false;
+                label.classList.remove(
+                  "bg-primary/10",
+                  "border-primary",
+                  "text-primary"
+                );
+                label.classList.add("bg-white", "border-neutral-200");
+                label.querySelector("span").classList.add("text-neutral-600");
+                label.querySelector("span").classList.remove("text-primary");
+              });
+            }
+
+            // 更新已评价数量
+            updateEvaluatedCount();
+
+            // 模拟更换图片
+            const img = document.querySelector("img");
+            img.src = `https://picsum.photos/800/500?random=${Math.floor(
+              Math.random() * 100
+            )}`;
+
+            // 重置按钮状态
+            const nextBtn = document.getElementById("next-btn");
+            nextBtn.classList.add("opacity-50", "cursor-not-allowed");
+
+            // 隐藏验证提示
+            document.getElementById("validation-hint").classList.add("hidden");
+          }, 1500);
+        } else {
+          console.log("条件不满足，显示验证提示");
+          // 显示验证提示
+          document.getElementById("validation-hint").classList.remove("hidden");
+
+          // 3秒后隐藏提示
+          setTimeout(() => {
+            document.getElementById("validation-hint").classList.add("hidden");
+          }, 5000);
+        }
+      });
+
+      // 更新已评价数量
+      function updateEvaluatedCount() {
+        const evaluatedCount = Object.values(evaluationStatus).filter(
+          (status) => status !== null
+        ).length;
+        document.getElementById("evaluated-count").textContent = evaluatedCount;
+
+        // 检查所有部分正确或分析错误的评价都有标签或语音
+        let allValid = true;
+        for (let i = 1; i <= 3; i++) {
+          if (evaluationStatus[i] === "partial" && !reasonStatus[i].partial) {
+            allValid = false;
+            break;
+          }
+          if (evaluationStatus[i] === "reject" && !reasonStatus[i].reject) {
+            allValid = false;
+            break;
+          }
+        }
+
+        // 启用/禁用下一张按钮
+        const nextBtn = document.getElementById("next-btn");
+        if (evaluatedCount === 3 && allValid) {
+          nextBtn.classList.remove("opacity-50", "cursor-not-allowed");
+        } else {
+          nextBtn.classList.add("opacity-50", "cursor-not-allowed");
+        }
+      }
+    </script>
   </body>
-  
 </html>
